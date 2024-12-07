@@ -18,6 +18,7 @@ import christmas.view.InputView.getOrder
 import christmas.view.InputView.getVisitedDay
 import christmas.view.OutputView
 import christmas.view.OutputView.printOrder
+import christmas.view.OutputView.printPresentatin
 import christmas.view.OutputView.printPreviewEventScript
 import christmas.view.OutputView.printTotalOrderPrice
 import christmas.view.OutputView.printWelcome
@@ -49,6 +50,7 @@ class EventController {
         printPreviewEventScript(visitDay.day)
         printOrder(orders)
         printTotalOrderPrice(totalOrderPrice)
+        printPresentatin(presentations)
     }
 
     private fun getDateEvents(visitDay: VisitDay): List<DateEvent> = listOf(
