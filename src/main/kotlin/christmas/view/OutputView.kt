@@ -2,6 +2,7 @@ package christmas.view
 
 import christmas.constants.Menu
 import christmas.domain.Order
+import com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary.formatNumber
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -16,6 +17,7 @@ object OutputView {
     private const val PRESENTATION_MENU = "<증정 메뉴>"
     private const val DISCOUNT_HISTORY = "<혜택 내역>"
     private const val TOTAL_DISCOUNT_AMOUNT = "<총혜택 금액>"
+    private const val TOTAL_PURCHASE_AMOUNT = "<할인 후 예상 결제 금액>"
 
     fun printWelcome() {
         println(WELCOME_MESSAGE)
@@ -61,6 +63,12 @@ object OutputView {
     fun printTotalDiscountAmount(totalDiscountAmount : Int) {
         println(TOTAL_DISCOUNT_AMOUNT)
         println("-${formatNumber(totalDiscountAmount)}원")
+        println()
+    }
+
+    fun printTotalPurchaseAmount(totalPurchaseAmount : Int) {
+        println(TOTAL_PURCHASE_AMOUNT)
+        println("${formatNumber(totalPurchaseAmount)}원")
         println()
     }
 
