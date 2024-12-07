@@ -4,5 +4,5 @@ import christmas.constants.Menu
 
 abstract class PresentationEvent {
     abstract val totalOrderPrice : Int
-    abstract fun present() : Map<Menu, Int>?
+    abstract fun present() : Pair<Menu, Int>?
 }

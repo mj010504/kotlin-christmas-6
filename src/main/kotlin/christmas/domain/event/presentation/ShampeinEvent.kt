@@ -1,10 +1,11 @@
 package christmas.domain.event.presentation
 
 import christmas.constants.Menu
+import jdk.internal.net.http.common.Pair.pair
 
 class ShampeinEvent(override val totalOrderPrice: Int) : PresentationEvent() {
-    override fun present(): Map<Menu, Int>? {
-        if (totalOrderPrice >= MIN_REQUIRED_PRICE) return mapOf(Menu.SHAMPEIN to QUANTITY)
+    override fun present(): Pair<Menu, Int>? {
+        if (totalOrderPrice >= MIN_REQUIRED_PRICE) return Pair(Menu.SHAMPEIN, QUANTITY)
         return null
     }
 
