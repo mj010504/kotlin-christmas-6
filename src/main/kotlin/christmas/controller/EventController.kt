@@ -18,6 +18,7 @@ import christmas.view.InputView.getOrder
 import christmas.view.InputView.getVisitedDay
 import christmas.view.OutputView
 import christmas.view.OutputView.printDiscountHistory
+import christmas.view.OutputView.printEventBadge
 import christmas.view.OutputView.printOrder
 import christmas.view.OutputView.printPresentatin
 import christmas.view.OutputView.printPreviewEventScript
@@ -38,8 +39,10 @@ class EventController {
             order.getTotalPrice()
         }
 
+        val totalQunantity = orders.size
+
         // 구매 날짜 관련 할인 이벤트
-        val dateEvents = getDateEvents(visitDay)
+        val dateEvents = getDateEvents(visitDay, totalQunantity)
         val discounts: MutableMap<String, Int> = applyDateEvents(dateEvents)
 
         // 증정 이벤트
@@ -64,13 +67,14 @@ class EventController {
         printDiscountHistory(discounts)
         printTotalDiscountAmount(totalDiscountAmount)
         printTotalPurchaseAmount(totalPurchaseAmount)
+        printEventBadge(badge)
     }
 
-    private fun getDateEvents(visitDay: VisitDay): List<DateEvent> = listOf(
-        WeekDayEvent(visitDay),
-        HolidayEvent(visitDay),
-        DdayEvent(visitDay),
-        SpecialEvent(visitDay)
+    private fun getDateEvents(visitDay: VisitDay, quantity : Int): List<DateEvent> = listOf(
+        WeekDayEvent(visitDay, quantity),
+        HolidayEvent(visitDay, quantity),
+        DdayEvent(visitDay, quantity),
+        SpecialEvent(visitDay, quantity)
     )
 
     private fun getPresentationEvents(totalOrderPrice: Int): List<PresentationEvent> = listOf(

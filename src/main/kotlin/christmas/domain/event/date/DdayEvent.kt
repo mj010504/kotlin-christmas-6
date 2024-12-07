@@ -2,7 +2,7 @@ package christmas.domain.event.date
 
 import christmas.domain.VisitDay
 
-class DdayEvent(override val visitDay: VisitDay) : DateEvent()  {
+class DdayEvent(override val visitDay: VisitDay, override val quantity: Int) : DateEvent()  {
     override val name = "크리스마스 디데이 할인"
     override fun getDiscountAmount(): Int {
         if(visitDay.day >= MAX_EVENT_DAY) return 0

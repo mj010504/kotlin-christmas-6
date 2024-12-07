@@ -2,7 +2,7 @@ package christmas.domain.event.date
 
 import christmas.domain.VisitDay
 
-class SpecialEvent(override val visitDay: VisitDay) : DateEvent() {
+class SpecialEvent(override val visitDay: VisitDay, override val quantity: Int) : DateEvent() {
     override val name = "특별 할인"
 
     override fun getDiscountAmount(): Int {
