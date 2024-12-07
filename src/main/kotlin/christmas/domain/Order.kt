@@ -4,7 +4,7 @@ package christmas.domain
 import christmas.constants.Menu
 import christmas.utils.Validator.getErrorMessage
 
-class Order(private val menu: Menu, private val quantity: Int) {
+class Order(val menu: Menu, val quantity: Int) {
 
     init {
         validateQuantity()
