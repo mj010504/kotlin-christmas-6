@@ -17,6 +17,7 @@ import christmas.view.InputView
 import christmas.view.InputView.getOrder
 import christmas.view.InputView.getVisitedDay
 import christmas.view.OutputView
+import christmas.view.OutputView.printDiscountHistory
 import christmas.view.OutputView.printOrder
 import christmas.view.OutputView.printPresentatin
 import christmas.view.OutputView.printPreviewEventScript
@@ -35,14 +36,19 @@ class EventController {
             order.getTotalPrice()
         }
 
+        // 구매 날짜 관련 할인 이벤트
+        val dateEvents = getDateEvents(visitDay)
+        val discounts: MutableMap<String, Int> = applyDateEvents(dateEvents)
+        val totalDiscountAmount = discounts.entries.sumOf { it.value }
+
         // 증정 이벤트
         val prresentationEvents = getPresentationEvents(totalOrderPrice)
         val presentations = applyPresentationEvents(prresentationEvents)
-
-        // 구매 날짜 관련 할인 이벤트
-        val dateEvents = getDateEvents(visitDay)
-        val discounts: Map<String, Int> = applyDateEvents(dateEvents)
-        val totalDiscountAmount = discounts.entries.sumOf { it.value }
+        val totalPresentationPrice = presentations.entries.sumOf { presentation ->
+            val menu = presentation.key
+            menu.price * presentation.value
+        }
+        if (totalPresentationPrice > 0) discounts.put("증정 이벤트", totalPresentationPrice)
 
         // 뱃지 증정 이벤트
         val badge = BadgeEvent().getBadge(totalOrderPrice)
@@ -51,6 +57,7 @@ class EventController {
         printOrder(orders)
         printTotalOrderPrice(totalOrderPrice)
         printPresentatin(presentations)
+        printDiscountHistory(discounts)
     }
 
     private fun getDateEvents(visitDay: VisitDay): List<DateEvent> = listOf(
@@ -64,7 +71,7 @@ class EventController {
         ShampeinEvent(totalOrderPrice)
     )
 
-    private fun applyDateEvents(dateEvents: List<DateEvent>): Map<String, Int> {
+    private fun applyDateEvents(dateEvents: List<DateEvent>): MutableMap<String, Int> {
         val discounts = mutableMapOf<String, Int>()
         dateEvents.forEach { event ->
             val discountAmount = event.getDiscountAmount()
@@ -73,11 +80,11 @@ class EventController {
         return discounts
     }
 
-    private fun applyPresentationEvents(presentationEvents : List<PresentationEvent>) : Map<Menu, Int> {
+    private fun applyPresentationEvents(presentationEvents: List<PresentationEvent>): Map<Menu, Int> {
         val presentations = mutableMapOf<Menu, Int>()
         presentationEvents.forEach { event ->
             val presentation = event.present()
-            if(presentation != null) presentations.put(presentation.first, presentation.second)
+            if (presentation != null) presentations.put(presentation.first, presentation.second)
         }
         return presentations
     }
