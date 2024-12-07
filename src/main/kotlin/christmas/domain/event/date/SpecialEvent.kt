@@ -1,7 +1,6 @@
-package christmas.constants
+package christmas.domain.event.date
 
 import christmas.domain.VisitDay
-import kotlin.math.absoluteValue
 
 class SpecialEvent(override val visitDay: VisitDay) : DateEvent() {
     override fun getDiscountAmount(): Int {

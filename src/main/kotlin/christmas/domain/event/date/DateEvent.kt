@@ -1,4 +1,4 @@
-package christmas.constants
+package christmas.domain.event.date
 
 import christmas.domain.VisitDay
 
