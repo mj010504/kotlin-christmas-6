@@ -1,5 +1,7 @@
 package christmas
 
-fun main() {
+import christmas.controller.EventController
 
+fun main() {
+    EventController().run()
 }
