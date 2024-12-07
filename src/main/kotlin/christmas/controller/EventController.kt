@@ -1,9 +1,11 @@
 package christmas.controller
 
+import christmas.constants.Badge
 import christmas.constants.Menu
 import christmas.domain.Order
 import christmas.domain.RestaurantMenu
 import christmas.domain.VisitDay
+import christmas.domain.event.badge.BadgeEvent
 import christmas.domain.event.date.DateEvent
 import christmas.domain.event.date.DdayEvent
 import christmas.domain.event.date.HolidayEvent
@@ -35,6 +37,9 @@ class EventController {
         // 구매 날짜 관련 할인 이벤트
         val dateEvents = getDateEvents(visitDay)
         val discounts: Map<String, Int> = applyDateEvents(dateEvents)
+
+        // 뱃지 증정 이벤트
+        val badge = BadgeEvent().getBadge(totalOrderPrice)
     }
 
     private fun getDateEvents(visitDay: VisitDay): List<DateEvent> = listOf(
