@@ -2,8 +2,6 @@ package christmas.domain
 
 
 import christmas.constants.Menu
-import christmas.constants.ORDER_FORMAT
-import christmas.utils.Validator
 import christmas.utils.Validator.getErrorMessage
 
 class Order(private val menu: Menu, private val quantity: Int) {

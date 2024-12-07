@@ -3,8 +3,6 @@ package christmas.utils
 
 import christmas.constants.Menu
 import christmas.constants.ORDER_FORMAT
-import christmas.domain.Order
-import christmas.domain.Order.Companion
 
 object Validator {
     private const val ERROR_LABLE = "[ERROR]"
@@ -28,7 +26,6 @@ object Validator {
             names.add(name)
             verfiyNoDuplicates(names)
         }
-
     }
 
     private fun validateOrderFormat(regex: Regex, order: String) {
