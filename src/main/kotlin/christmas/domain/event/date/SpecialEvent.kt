@@ -3,6 +3,8 @@ package christmas.domain.event.date
 import christmas.domain.VisitDay
 
 class SpecialEvent(override val visitDay: VisitDay) : DateEvent() {
+    override val name = "특별 할인"
+
     override fun getDiscountAmount(): Int {
         if (eventDays.contains(visitDay.day)) return 1000
         return 0

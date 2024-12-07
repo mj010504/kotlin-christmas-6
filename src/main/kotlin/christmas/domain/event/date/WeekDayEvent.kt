@@ -5,6 +5,7 @@ import java.time.DayOfWeek
 import java.time.LocalDate
 
 class WeekDayEvent(override val visitDay: VisitDay) : DateEvent()  {
+    override val name = "평일 할인"
 
     override fun getDiscountAmount(): Int {
         val date = LocalDate.of(2023, 12, visitDay.day)

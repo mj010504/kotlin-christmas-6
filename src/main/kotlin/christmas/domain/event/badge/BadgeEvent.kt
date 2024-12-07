@@ -10,6 +10,4 @@ class BadgeEvent(private val totalOrderPrice: Int) {
         }
         return null
     }
-
-
 }
