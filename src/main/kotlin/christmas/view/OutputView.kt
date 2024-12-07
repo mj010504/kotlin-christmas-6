@@ -15,6 +15,7 @@ object OutputView {
     private const val TOTAL_ORDER_PRICE = "<할인 전 총주문 금액>"
     private const val PRESENTATION_MENU = "<증정 메뉴>"
     private const val DISCOUNT_HISTORY = "<혜택 내역>"
+    private const val TOTAL_DISCOUNT_AMOUNT = "<총혜택 금액>"
 
     fun printWelcome() {
         println(WELCOME_MESSAGE)
@@ -54,6 +55,12 @@ object OutputView {
         discounts.forEach { discount ->
             println("${discount.key}: -${formatNumber(discount.value)}")
         }
+        println()
+    }
+
+    fun printTotalDiscountAmount(totalDiscountAmount : Int) {
+        println(TOTAL_DISCOUNT_AMOUNT)
+        println("-${formatNumber(totalDiscountAmount)}원")
         println()
     }
 
