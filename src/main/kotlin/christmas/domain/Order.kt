@@ -18,7 +18,6 @@ class Order(val menu: Menu, val quantity: Int) {
     }
 
     fun getTotalPrice(): Int = menu.price * quantity
-
     fun isMain() = menu.menuType == MenuType.MAIN
     fun isDesert() = menu.menuType == MenuType.DESERT
 

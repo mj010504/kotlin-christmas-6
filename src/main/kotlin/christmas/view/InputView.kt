@@ -13,7 +13,6 @@ object InputView {
     private const val ORDER_SCRIPT = "주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)"
 
     fun getVisitedDay(): VisitDay {
-        while (true) {
             try {
                 println(VISIT_DAY_SCRIPT)
                 val visitDay = Console.readLine()
@@ -22,11 +21,11 @@ object InputView {
             } catch (e: Exception) {
                 println(e.message)
             }
-        }
+
+        return VisitDay(1)
     }
 
     fun getOrder(): List<Order> {
-        while (true) {
             try {
                 println(ORDER_SCRIPT)
                 val orderInput = Console.readLine().split(",")
@@ -45,6 +44,6 @@ object InputView {
             } catch (e: Exception) {
                 println(e.message)
             }
+            return listOf()
         }
-    }
 }
