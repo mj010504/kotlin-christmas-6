@@ -34,15 +34,12 @@ class EventController {
         val visitDay = getVisitedDay()
         val orders = getOrder()
 
-
         val totalOrderPrice = orders.sumOf { order ->
             order.getTotalPrice()
         }
 
-        val totalQunantity = orders.size
-
         // 구매 날짜 관련 할인 이벤트
-        val dateEvents = getDateEvents(visitDay, totalQunantity)
+        val dateEvents = getDateEvents(visitDay, orders)
         val discounts: MutableMap<String, Int> = applyDateEvents(dateEvents)
 
         // 증정 이벤트
@@ -70,12 +67,22 @@ class EventController {
         printEventBadge(badge)
     }
 
-    private fun getDateEvents(visitDay: VisitDay, quantity : Int): List<DateEvent> = listOf(
-        WeekDayEvent(visitDay, quantity),
-        HolidayEvent(visitDay, quantity),
-        DdayEvent(visitDay, quantity),
-        SpecialEvent(visitDay, quantity)
-    )
+    private fun getDateEvents(visitDay: VisitDay, orders: List<Order>): List<DateEvent> {
+        val mainCount = orders.count { order ->
+            order.isMain()
+        }
+
+        val desertCount = orders.count { order ->
+            order.isDesert()
+        }
+
+        return listOf(
+            WeekDayEvent(visitDay, desertCount),
+            HolidayEvent(visitDay, mainCount),
+            DdayEvent(visitDay),
+            SpecialEvent(visitDay)
+        )
+    }
 
     private fun getPresentationEvents(totalOrderPrice: Int): List<PresentationEvent> = listOf(
         ShampeinEvent(totalOrderPrice)

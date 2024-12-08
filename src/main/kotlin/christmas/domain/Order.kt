@@ -2,6 +2,7 @@ package christmas.domain
 
 
 import christmas.constants.Menu
+import christmas.constants.MenuType
 import christmas.utils.Validator.getErrorMessage
 
 class Order(val menu: Menu, val quantity: Int) {
@@ -16,7 +17,10 @@ class Order(val menu: Menu, val quantity: Int) {
         }
     }
 
-    fun getTotalPrice() : Int = menu.price * quantity
+    fun getTotalPrice(): Int = menu.price * quantity
+
+    fun isMain() = menu.menuType == MenuType.MAIN
+    fun isDesert() = menu.menuType == MenuType.DESERT
 
     companion object {
         private const val MIN_QUANTITY = 1
